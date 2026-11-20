@@ -1,0 +1,417 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management | Ashton&Lilo</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="dashboard-body">
+
+    <div class="dashboard-wrapper">
+
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+        <aside class="sidebar">
+
+            <div class="sidebar-brand">
+                <h3>Ashton&Lilo</h3>
+                <small>Management System</small>
+            </div>
+
+            <p class="menu-heading">MAIN MENU</p>
+
+            <nav class="sidebar-menu">
+
+                <a href="dashboard.html" class="menu-link">
+                    <span>▦</span> Dashboard
+                </a>
+
+                <a href="products.html" class="menu-link active">
+                    <span>□</span> Products
+                </a>
+
+                <a href="orders.html" class="menu-link">
+                    <span>▤</span> Orders
+                </a>
+
+                <a href="customers.html" class="menu-link">
+                    <span>♙</span> Customers
+                </a>
+
+                <a href="reports.html" class="menu-link">
+                    <span>▥</span> Reports
+                </a>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+                <a href="login.html" class="menu-link">
+                    <span>↪</span> Logout
+                </a>
+            </div>
+
+            <div class="sidebar-account">
+                <div class="account-avatar">A</div>
+
+                <div class="account-info">
+                    <strong>Administrator</strong>
+                    <small>Admin Account</small>
+                </div>
+            </div>
+
+        </aside>
+
+        <main class="dashboard-main">
+
+            <header class="dashboard-header">
+
+                <button
+                    class="mobile-menu-btn"
+                    id="mobileMenuBtn"
+                    type="button"
+                    aria-label="Open navigation menu"
+                    aria-expanded="false"
+                >
+                    ☰
+                </button>
+
+                <div>
+                    <h4>Product Management</h4>
+                    <p>Manage your online store products.</p>
+                </div>
+
+                <div class="header-actions">
+
+                    <button
+                        class="header-icon-btn"
+                        id="notificationBtn"
+                        type="button"
+                        aria-label="Notifications"
+                    >
+                        <span>🔔</span>
+                        <span class="header-notification-badge">3</span>
+                    </button>
+
+                    <button
+                        class="header-icon-btn"
+                        id="messageBtn"
+                        type="button"
+                        aria-label="Messages"
+                    >
+                        <span>✉</span>
+                        <span class="header-notification-badge">2</span>
+                    </button>
+
+                    <button
+                        class="theme-toggle"
+                        id="themeToggle"
+                        type="button"
+                        aria-label="Switch to dark mode"
+                        title="Switch theme"
+                    >
+                        <span id="themeIcon">☾</span>
+                        <span id="themeText">Dark Mode</span>
+                    </button>
+
+                    <div class="header-popup" id="notificationPanel">
+
+                        <div class="header-popup-title">
+                            <strong>Notifications</strong>
+                            <span id="notificationCount">0 alerts</span>
+                        </div>
+
+                        <div id="notificationList">
+                            <p class="text-muted p-3 mb-0">
+                                Loading notifications...
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="header-popup" id="messagePanel">
+
+                        <div class="header-popup-title">
+                            <strong>Messages</strong>
+                            <span>2 unread</span>
+                        </div>
+
+                        <div class="header-popup-item">
+                            <strong>Customer Support</strong>
+                            <p>Hello! I have a question about my order.</p>
+                            <small>Recent message</small>
+                        </div>
+
+                        <div class="header-popup-item">
+                            <strong>Store Administrator</strong>
+                            <p>Please review the latest store updates.</p>
+                            <small>Recent message</small>
+                        </div>
+
+                    </div>
+
+                    <div class="admin-account-menu">
+
+                        <button
+                            class="admin-profile"
+                            id="adminProfileBtn"
+                            type="button"
+                            aria-expanded="false"
+                        >
+                            <div class="admin-avatar">A</div>
+
+                            <div>
+                                <strong>Administrator</strong>
+                                <small>Admin Account</small>
+                            </div>
+
+                            <span class="admin-dropdown-arrow">⌄</span>
+                        </button>
+
+                        <div class="admin-dropdown" id="adminDropdown">
+                            <a href="login.html">↪ Logout</a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+            <section class="dashboard-content">
+
+                <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+
+                    <div>
+                        <h5 class="section-title mb-1">
+                            All Products
+                        </h5>
+
+                        <p class="text-muted mb-0">
+                            View and manage your product inventory.
+                        </p>
+                    </div>
+
+                    <button
+                        class="btn product-add-btn"
+                        data-bs-toggle="modal"
+                        data-bs-target="#productModal"
+                        id="addProductBtn"
+                    >
+                        + Add New Product
+                    </button>
+
+                </div>
+
+                <div class="row g-3 mb-4">
+
+                    <div class="col-md-4">
+                        <div
+                            class="stat-card product-all-filter-card"
+                            role="button"
+                            tabindex="0"
+                        >
+                            <p>Total Products</p>
+                            <h3 id="totalProducts">0</h3>
+                            <small>Products in store</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <p>Total Stock</p>
+                            <h3 id="totalStock">0</h3>
+                            <small>Available units</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div
+                            class="stat-card product-filter-card"
+                            data-filter="low-stock"
+                            role="button"
+                            tabindex="0"
+                        >
+                            <p>Low Stock Products</p>
+                            <h3 id="lowStock">0</h3>
+                            <small>Products with 10 or fewer units</small>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="content-card">
+
+                    <div class="row align-items-center mb-4">
+
+                        <div class="col-md-6">
+                            <h5>Product Inventory</h5>
+                        </div>
+
+                        <div class="col-md-6">
+                            <input
+                                type="text"
+                                id="productSearch"
+                                class="form-control"
+                                placeholder="Search products..."
+                            >
+                        </div>
+
+                    </div>
+
+                    <div class="table-responsive">
+
+                        <table class="table align-middle">
+
+                            <thead>
+                                <tr>
+                                    <th>Product ID</th>
+                                    <th>Product Name</th>
+                                    <th>Category</th>
+                                    <th>Price</th>
+                                    <th>Stock</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="productTableBody"></tbody>
+
+                        </table>
+
+                    </div>
+
+                    <p id="emptyMessage" class="text-center text-muted d-none">
+                        No products found.
+                    </p>
+
+                </div>
+
+            </section>
+
+            <footer class="main-footer">
+                Ashton&Lilo · E-Commerce Management System ·
+                Nur Irdina Syahirah Mustafa ·
+                Subject: Advanced Web Design Development and Content Management ·
+                © 2026 Ashton&Lilo. All Rights Reserved.
+            </footer>
+
+        </main>
+
+    </div>
+
+    <div class="modal fade" id="productModal" tabindex="-1">
+
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">
+                        Add New Product
+                    </h5>
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    ></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <form id="productForm">
+
+                        <input type="hidden" id="productId">
+
+                        <div class="mb-3">
+                            <label for="productName" class="form-label">
+                                Product Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="productName"
+                                class="form-control"
+                                placeholder="Enter product name"
+                                required
+                            >
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="productCategory" class="form-label">
+                                Category
+                            </label>
+
+                            <select
+                                id="productCategory"
+                                class="form-select"
+                                required
+                            >
+                                <option value="">Select category</option>
+                                <option value="Clothing">Clothing</option>
+                                <option value="Accessories">Accessories</option>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Footwear">Footwear</option>
+                                <option value="Lifestyle">Lifestyle</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="productPrice" class="form-label">
+                                Price (RM)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="productPrice"
+                                class="form-control"
+                                min="0.01"
+                                step="0.01"
+                                placeholder="Enter price"
+                                required
+                            >
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="productStock" class="form-label">
+                                Stock Quantity
+                            </label>
+
+                            <input
+                                type="number"
+                                id="productStock"
+                                class="form-control"
+                                min="0"
+                                step="1"
+                                placeholder="Enter stock quantity"
+                                required
+                            >
+                        </div>
+
+                        <button type="submit" class="btn product-add-btn w-100">
+                            Save Product
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/script.js"></script>
+
+</body>
+</html>
